@@ -1,0 +1,51 @@
+definitions:
+  brand.Result:
+    properties:
+      results:
+        additionalProperties:
+          type: string
+        example:
+          competing_brand_name: https://competingbrand.com.br
+        type: object
+    type: object
+  handler.SearchBrandRequest:
+    properties:
+      terms:
+        example:
+        - term1
+        - term2
+        - term3
+        items:
+          type: string
+        type: array
+    type: object
+info:
+  contact:
+    email: leonardobispo.dev@gmail.com
+    name: Leonardo de Farias Bispo
+  description: Find my brand documentation
+  title: Find my brand
+  version: "1.0"
+paths:
+  /:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Required brand info
+        in: body
+        name: terms
+        required: true
+        schema:
+          $ref: '#/definitions/handler.SearchBrandRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/brand.Result'
+      summary: Search Brand
+      tags:
+      - Brand
+swagger: "2.0"

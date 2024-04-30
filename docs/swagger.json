@@ -1,0 +1,79 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Find my brand documentation",
+        "title": "Find my brand",
+        "contact": {
+            "name": "Leonardo de Farias Bispo",
+            "email": "leonardobispo.dev@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Search Brand",
+                "parameters": [
+                    {
+                        "description": "Required brand info",
+                        "name": "terms",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.SearchBrandRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/brand.Result"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "brand.Result": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "example": {
+                        "competing_brand_name": "https://competingbrand.com.br"
+                    }
+                }
+            }
+        },
+        "handler.SearchBrandRequest": {
+            "type": "object",
+            "properties": {
+                "terms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "term1",
+                        "term2",
+                        "term3"
+                    ]
+                }
+            }
+        }
+    }
+}
