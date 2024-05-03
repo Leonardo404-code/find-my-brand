@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"encoding/json"
 	"io"
 	"net/http"
 
@@ -16,16 +15,15 @@ import (
 // @Produce json
 // @Success 200 {object} brand.Result
 func (h *handler) Search(w http.ResponseWriter, r *http.Request) {
-	terms := new(SearchRequest)
-
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		customErr.Error(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	if err := json.Unmarshal(body, &terms); err != nil {
-		customErr.Error(w, http.StatusBadRequest, err)
+	_, err = h.brandSvc.SearchTerms(r.Context(), body)
+	if err != nil {
+		customErr.Error(w, http.StatusInternalServerError, err)
 		return
 	}
 

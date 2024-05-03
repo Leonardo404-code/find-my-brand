@@ -4,7 +4,9 @@ import (
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 )
 
-type handler struct{}
+type handler struct {
+	brandSvc brand.Services
+}
 
 func New(options ...Option) (brand.Handlers, error) {
 	handler := &handler{}
@@ -18,8 +20,8 @@ func New(options ...Option) (brand.Handlers, error) {
 	return handler, nil
 }
 
-func Must() brand.Handlers {
-	handler, err := New()
+func Must(brandSvc brand.Services) brand.Handlers {
+	handler, err := New(WithService(brandSvc))
 	if err != nil {
 		panic(err)
 	}
