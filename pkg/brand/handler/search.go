@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	customErr "github.com/Leonargo404-code/find-my-brand/pkg/errors"
-	"github.com/Leonargo404-code/find-my-brand/pkg/res"
+	"github.com/Leonargo404-code/find-my-brand/pkg/mail"
 )
 
 // @Summary Search
@@ -28,5 +28,10 @@ func (h *handler) Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res.JSON(w, http.StatusOK, result)
+	if err := mail.SendEmail(result); err != nil {
+		customErr.Error(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }
