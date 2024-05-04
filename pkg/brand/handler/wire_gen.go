@@ -9,12 +9,14 @@ package handler
 import (
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand/service"
+	"github.com/Leonargo404-code/find-my-brand/pkg/searchAPI"
 )
 
 // Injectors from wire.go:
 
 func Build() brand.Handlers {
-	services := service.Must()
+	searchAPI := searchapi.Must()
+	services := service.Must(searchAPI)
 	handlers := Must(services)
 	return handlers
 }

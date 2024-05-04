@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	customErr "github.com/Leonargo404-code/find-my-brand/pkg/errors"
+	"github.com/Leonargo404-code/find-my-brand/pkg/res"
 )
 
 // @Summary Search
@@ -21,11 +22,11 @@ func (h *handler) Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = h.brandSvc.SearchTerms(r.Context(), body)
+	result, err := h.brandSvc.SearchTerms(r.Context(), body)
 	if err != nil {
 		customErr.Error(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	res.JSON(w, http.StatusOK, result)
 }
