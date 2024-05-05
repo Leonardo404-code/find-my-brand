@@ -1,0 +1,41 @@
+.main-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main-section h1,
+h3,
+input,
+button {
+  margin-top: 1rem;
+}
+
+.main-section form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.terms-list {
+  text-transform: capitalize;
+}
+
+.add-term-button:hover {
+  filter: brightness(80%);
+}
+
+.search-google-section {
+  direction: rtl;
+  margin-right: 1rem;
+}
+
+.terms-list {
+  margin-top: 1rem;
+  background-color: rgb(0, 0, 0, 0.5);
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}

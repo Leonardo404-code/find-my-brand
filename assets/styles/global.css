@@ -1,0 +1,33 @@
+:root {
+  --backgroundColor: #14213d;
+  --fontColor: #edf2f4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--backgroundColor);
+  font-family: "Open Sans", sans-serif;
+  color: #edf2f4;
+}
+
+input {
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+}
+
+button {
+  border-radius: 3px;
+  padding: 0.5rem 0.4rem 0.5rem 0.4rem;
+  background-color: #52b788;
+  color: var(--fontColor);
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+}

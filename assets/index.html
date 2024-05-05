@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/find-brand.css">
+  <title>Encontre minha marca</title>
+</head>
+<body>
+  <section class="main-section">
+    <h1 class="title">Encontre minha marca</h1>
+    <h3 class="sub-title">Adicione termos abaixo para buscar concorrentes no google</h3>
+    <form id="add-term">
+      <input type="text" id="input" name="term"/>
+      <button type="submit" class="add-term-button">Adicionar termo</button>
+    </form>
+    <div id="terms-list">
+    </div>
+  </section>
+  <section class="search-google-section">
+    <form id="submit-terms">
+      <button type="submit">Buscar no Google</button>
+    </form>
+  </section>
+  <script src="./js/index.js"></script>
+</body>
+</html>
