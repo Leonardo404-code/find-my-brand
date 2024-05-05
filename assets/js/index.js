@@ -74,6 +74,12 @@ searchGoogleForm.addEventListener("submit", function(e) {
     apiURL = "http://localhost:3000"
   }
 
+  fetchResult(opt, apiURL)
+
+  window.location.assign("thanks.html")
+})
+
+async function fetchResult(opt, apiURL) {
   fetch(`${apiURL}/search?location=Brazil`, opt).
   then(res => {
     if (res.status == 400) {
@@ -86,4 +92,4 @@ searchGoogleForm.addEventListener("submit", function(e) {
   catch(err => {
     alert(err)
   })
-})
+}
