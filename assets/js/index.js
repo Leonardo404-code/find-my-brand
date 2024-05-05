@@ -29,7 +29,8 @@ const addEmailForm = document.querySelector("#add-email")
 addEmailForm.addEventListener("submit", function(e) {
   e.preventDefault()
   const emailInput = document.querySelector("#email")
-  if (String(emailInput).trim() == "") {
+  const emailText = String(emailInput.value)
+  if (emailText.trim() == "") {
     alert("Campo de email não pode estar vazio")
     return
   }
