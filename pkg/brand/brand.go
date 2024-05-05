@@ -14,5 +14,6 @@ type (
 
 	FindBrandRequest struct {
 		Terms string `json:"terms,omitempty" example:"term1,term2,term3"`
+		Email string `json:"email,omitempty"`
 	}
 )

@@ -1,6 +1,7 @@
 const addTermForm = document.querySelector("#add-term")
 
 termsContent = ""
+email = ""
 
 addTermForm.addEventListener("submit", function (e) {
   e.preventDefault()
@@ -19,10 +20,26 @@ addTermForm.addEventListener("submit", function (e) {
   TermsList.innerHTML = `<p>${termsContent}</p>`
 })
 
-const searchGoogleForm = document.querySelector("#submit-terms")
+const addEmailForm = document.querySelector("#add-email")
+addEmailForm.addEventListener("submit", function(e) {
+  e.preventDefault()
+  const emailInput = document.querySelector("#email")
+  email = String(emailInput.value)
+})
 
+const searchGoogleForm = document.querySelector("#submit-terms")
 searchGoogleForm.addEventListener("submit", function(e) {
   e.preventDefault()
+
+  if (String(termsContent).trim == "") {
+    alert("É necessário ao menos um termo para realizar a pesquisa")
+    return
+  }
+
+  if (String(email).trim == "") {
+    alert("É adicionar um e-mail para envio do reporte")
+    return
+  }
 
   const opt = {
     method: "POST",
@@ -30,7 +47,8 @@ searchGoogleForm.addEventListener("submit", function(e) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      terms: termsContent
+      terms: termsContent,
+      email: email
     })
   }
 

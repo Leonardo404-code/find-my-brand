@@ -9,6 +9,7 @@ import (
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 	customErr "github.com/Leonargo404-code/find-my-brand/pkg/errors"
 	"github.com/Leonargo404-code/find-my-brand/pkg/mail"
+	"github.com/badoux/checkmail"
 )
 
 // @Summary Search
@@ -37,6 +38,14 @@ func (h *handler) Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if err := checkmail.ValidateFormat(findBrandReq.Email); err != nil {
+		customErr.Error(
+			w,
+			http.StatusBadRequest,
+			fmt.Errorf("invalid e-mail: %v", err),
+		)
+	}
+
 	location := r.URL.Query().Get("location")
 	if location == "" {
 		location = "Brazil"
@@ -49,11 +58,11 @@ func (h *handler) Search(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(result.Ads) == 0 {
-		w.WriteHeader(http.StatusNotFound)
+		customErr.Error(w, http.StatusNotFound, fmt.Errorf("results not found"))
 		return
 	}
 
-	if err := mail.SendEmail(result); err != nil {
+	if err := mail.SendEmail(result, findBrandReq.Email); err != nil {
 		customErr.Error(w, http.StatusInternalServerError, err)
 		return
 	}
