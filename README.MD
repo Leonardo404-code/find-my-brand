@@ -1,6 +1,6 @@
 # Find my Brand
 
-Find my brand é uma aplicação full-stack que busca termos da sua marca diretamente no Google e verifica quais concorrentes estão se aproveitando dos seus termos de marca nos resultados patrocinados.
+Find my brand é uma aplicação full-stack que realiza pesquisas no Google e verifica quais concorrentes estão se aproveitando dos seus termos de marca nos resultados patrocinados.
 
 ## Documentação da API
 
