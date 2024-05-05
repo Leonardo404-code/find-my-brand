@@ -1,8 +1,9 @@
 .main-section {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
   flex-direction: column;
+  margin: 1rem 0px 0px 1rem;
 }
 
 .main-section h1,
@@ -14,8 +15,8 @@ button {
 
 .main-section form {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
   flex-direction: column;
 }
 
@@ -24,12 +25,11 @@ button {
 }
 
 .search-google-section {
-  direction: rtl;
-  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 .add-term {
-  width: 50%;
+  width: 100%;
 }
 
 .add-term input {
@@ -37,7 +37,7 @@ button {
 }
 
 .add-email {
-  width: 50%;
+  width: 100%;
 }
 
 .add-email input {
@@ -50,4 +50,27 @@ button {
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   border-radius: 5px;
   font-size: 1.2rem;
+}
+
+
+@media screen and (max-width: 550px) {
+  .sub-title {
+    width: 90%;
+  }
+
+  .add-term input {
+    width: 90%;
+  }
+
+  .add-email input {
+    width: 90%;
+  }
+
+  .search-google-section {
+    direction: initial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0rem;
+  }
 }
