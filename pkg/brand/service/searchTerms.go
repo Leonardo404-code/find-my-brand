@@ -1,7 +1,6 @@
 package service
 
 import (
-	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -16,20 +15,10 @@ func (s *service) SearchTerms(
 		return nil, fmt.Errorf("no terms found in the request")
 	}
 
-	searchResult := new(brand.Result)
-
-	result, err := s.SearchAPI.GoogleSearch(findBrandReq.Terms, location)
+	result, err := s.SearchAPI.GoogleSearch(findBrandReq.Terms, location, 1)
 	if err != nil {
 		return nil, fmt.Errorf("failed in search with google: %v", err)
 	}
 
-	if err := json.Unmarshal(result, searchResult); err != nil {
-		return nil, fmt.Errorf("failed in unmarshal result: %v", err)
-	}
-
-	if len(searchResult.Ads) == 0 {
-		return nil, fmt.Errorf("ads not found in this search")
-	}
-
-	return searchResult, nil
+	return result, nil
 }
