@@ -29,15 +29,15 @@ const docTemplate = `{
                 "tags": [
                     "Brand"
                 ],
-                "summary": "Search Brand",
+                "summary": "Search",
                 "parameters": [
                     {
-                        "description": "Required brand info",
+                        "description": "Brand terms to search in web",
                         "name": "terms",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/handler.SearchBrandRequest"
+                            "$ref": "#/definitions/handler.SearchRequest"
                         }
                     }
                 ],
@@ -67,7 +67,7 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.SearchBrandRequest": {
+        "handler.SearchRequest": {
             "type": "object",
             "properties": {
                 "terms": {

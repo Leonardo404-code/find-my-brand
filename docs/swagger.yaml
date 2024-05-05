@@ -8,7 +8,7 @@ definitions:
           competing_brand_name: https://competingbrand.com.br
         type: object
     type: object
-  handler.SearchBrandRequest:
+  handler.SearchRequest:
     properties:
       terms:
         example:
@@ -32,12 +32,12 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: Required brand info
+      - description: Brand terms to search in web
         in: body
         name: terms
         required: true
         schema:
-          $ref: '#/definitions/handler.SearchBrandRequest'
+          $ref: '#/definitions/handler.SearchRequest'
       produces:
       - application/json
       responses:
@@ -45,7 +45,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/brand.Result'
-      summary: Search Brand
+      summary: Search
       tags:
       - Brand
 swagger: "2.0"
