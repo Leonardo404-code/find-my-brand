@@ -1,9 +1,12 @@
 package handler
 
 import (
+	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 
+	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 	customErr "github.com/Leonargo404-code/find-my-brand/pkg/errors"
 	"github.com/Leonargo404-code/find-my-brand/pkg/mail"
 )
@@ -22,7 +25,19 @@ func (h *handler) Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := h.brandSvc.SearchTerms(r.Context(), body)
+	findBrandReq := new(brand.FindBrandRequest)
+	if err := json.Unmarshal(body, &findBrandReq); err != nil {
+		customErr.Error(
+			w,
+			http.StatusBadRequest,
+			fmt.Errorf("error in unmarshal body: %v", err),
+		)
+		return
+	}
+
+	location := r.URL.Query().Get("location")
+
+	result, err := h.brandSvc.SearchTerms(findBrandReq, location)
 	if err != nil {
 		customErr.Error(w, http.StatusInternalServerError, err)
 		return

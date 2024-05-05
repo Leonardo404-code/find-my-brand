@@ -4,7 +4,6 @@ import (
 	"sync"
 
 	"github.com/Leonargo404-code/find-my-brand/internal/env"
-	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 )
 
 type (
@@ -14,7 +13,7 @@ type (
 	}
 
 	SearchAPI interface {
-		GoogleSearch(searchQuery, location string) (*brand.Result, error)
+		GoogleSearch(searchQuery, location string) ([]byte, error)
 	}
 )
 

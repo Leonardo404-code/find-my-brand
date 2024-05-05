@@ -1,16 +1,13 @@
 package searchapi
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
-
-	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 )
 
-func (a *APIConfig) GoogleSearch(searchQuery, location string) (*brand.Result, error) {
+func (a *APIConfig) GoogleSearch(searchQuery, location string) ([]byte, error) {
 	queryParams := url.Values{}
 	queryParams.Add("api_key", a.ApiKey)
 	queryParams.Add("engine", a.Engine)
@@ -25,24 +22,14 @@ func (a *APIConfig) GoogleSearch(searchQuery, location string) (*brand.Result, e
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("failed in response")
+		return nil, fmt.Errorf("failed in make request: %v", err)
 	}
 
 	defer res.Body.Close()
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed in read all")
+		return nil, fmt.Errorf("error in read body: %v", err)
 	}
 
-	result := new(brand.Result)
-
-	if err := json.Unmarshal(body, result); err != nil {
-		return nil, fmt.Errorf("failed in unmarshal result")
-	}
-
-	if len(result.Ads) == 0 {
-		return nil, fmt.Errorf("ads not found in this search")
-	}
-
-	return result, nil
+	return body, nil
 }
