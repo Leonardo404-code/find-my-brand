@@ -44,6 +44,8 @@ func (h *handler) Search(w http.ResponseWriter, r *http.Request) {
 			http.StatusBadRequest,
 			fmt.Errorf("invalid e-mail: %v", err),
 		)
+
+		return
 	}
 
 	location := r.URL.Query().Get("location")

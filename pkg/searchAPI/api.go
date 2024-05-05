@@ -1,9 +1,9 @@
 package searchapi
 
 import (
+	"os"
 	"sync"
 
-	"github.com/Leonargo404-code/find-my-brand/internal/env"
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 )
 
@@ -23,7 +23,7 @@ var once sync.Once
 func Must() (searchAPI SearchAPI) {
 	once.Do(func() {
 		searchAPI = &APIConfig{
-			ApiKey: env.GetString(APIKEY),
+			ApiKey: os.Getenv(APIKEY),
 			Engine: engineName,
 		}
 	})

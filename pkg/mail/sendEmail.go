@@ -3,18 +3,18 @@ package mail
 import (
 	"crypto/tls"
 	"fmt"
+	"os"
 
-	"github.com/Leonargo404-code/find-my-brand/internal/env"
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand"
 	gomail "gopkg.in/mail.v2"
 )
 
 func SendEmail(ads *brand.Result, userEmail string) error {
-	d := gomail.NewDialer(host, port, env.GetString(USER), env.GetString(PASSWORD))
+	d := gomail.NewDialer(host, port, os.Getenv(USER), os.Getenv(PASSWORD))
 	d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 
 	m := gomail.NewMessage()
-	m.SetHeader("From", env.GetString(USER))
+	m.SetHeader("From", os.Getenv(USER))
 	m.SetHeader("To", userEmail)
 	m.SetHeader("Subject", "Aqui estão os concorrentes que estão usando seus termos")
 
