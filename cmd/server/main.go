@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand/handler"
 	"github.com/rs/cors"
@@ -29,8 +30,8 @@ func main() {
 
 	handler := cors.Handler(r)
 
-	log.Println("Server started at: http://localhost:3000")
-	if err := http.ListenAndServe(":3000", handler); err != nil {
+	log.Printf("Server started at: http://localhost:%s", os.Getenv("PORT"))
+	if err := http.ListenAndServe(":"+os.Getenv("PORT"), handler); err != nil {
 		panic(err)
 	}
 }
