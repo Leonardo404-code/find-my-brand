@@ -15,9 +15,12 @@ import (
 // @description Find my brand documentation
 func main() {
 	r := http.NewServeMux()
-	brandHandlers := handler.Build()
 
-	r.HandleFunc("/", brandHandlers.Search)
+	fs := http.FileServer(http.Dir("./assets"))
+	r.Handle("/", fs)
+
+	brandHandlers := handler.Build()
+	r.HandleFunc("/search", brandHandlers.Search)
 
 	cors := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
