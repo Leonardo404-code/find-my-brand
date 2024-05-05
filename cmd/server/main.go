@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/Leonargo404-code/find-my-brand/pkg/brand/handler"
+	"github.com/rs/cors"
 )
 
 // @contact.name Leonardo de Farias Bispo
@@ -18,8 +19,15 @@ func main() {
 
 	r.HandleFunc("/", brandHandlers.Search)
 
+	cors := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{http.MethodPost},
+	})
+
+	handler := cors.Handler(r)
+
 	log.Println("Server started at: http://localhost:3000")
-	if err := http.ListenAndServe(":3000", r); err != nil {
+	if err := http.ListenAndServe(":3000", handler); err != nil {
 		panic(err)
 	}
 }
