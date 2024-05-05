@@ -35,6 +35,7 @@ addEmailForm.addEventListener("submit", function(e) {
   }
 
   email = String(emailInput.value)
+  alert("e-mail adicionado")
 })
 
 const searchGoogleForm = document.querySelector("#submit-terms")
