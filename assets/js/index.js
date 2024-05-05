@@ -62,7 +62,17 @@ searchGoogleForm.addEventListener("submit", function(e) {
     })
   }
 
-  fetch("http://localhost:3000?location=Brazil", opt).
+  apiURL = ""
+
+  const environment = window.location.hostname
+
+  if (environment != "127.0.0.1") {
+    apiURL = "https://brand-monitor-gzbnmirggq-ue.a.run.app"
+  } else {
+    apiURL = "http://localhost:3000"
+  }
+
+  fetch(`${apiURL}/search?location=Brazil`, opt).
   then(res => {
     if (res.status == 400) {
       alert("Nenhum resultado encontrado para sua busca nas páginas 1 - 3 do Google")
