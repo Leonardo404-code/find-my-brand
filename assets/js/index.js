@@ -7,8 +7,13 @@ addTermForm.addEventListener("submit", function (e) {
   e.preventDefault()
 
   const term = document.querySelector("#input")
-  const termText = String(term.value)
+  const termText = String(term.value).trim()
   const TermsList = document.querySelector("#terms-list")
+
+  if (termText == "") {
+    alert("Campo de termos não pode estar vazio")
+    return
+  }
 
   if (termsContent != "") {
     termsContent += `,${termText}`
@@ -24,6 +29,11 @@ const addEmailForm = document.querySelector("#add-email")
 addEmailForm.addEventListener("submit", function(e) {
   e.preventDefault()
   const emailInput = document.querySelector("#email")
+  if (String(emailInput).trim() == "") {
+    alert("Campo de email não pode estar vazio")
+    return
+  }
+
   email = String(emailInput.value)
 })
 
@@ -31,13 +41,13 @@ const searchGoogleForm = document.querySelector("#submit-terms")
 searchGoogleForm.addEventListener("submit", function(e) {
   e.preventDefault()
 
-  if (String(termsContent).trim == "") {
+  if (String(termsContent).trim() == "") {
     alert("É necessário ao menos um termo para realizar a pesquisa")
     return
   }
 
-  if (String(email).trim == "") {
-    alert("É adicionar um e-mail para envio do reporte")
+  if (String(email).trim() == "") {
+    alert("Adicione um e-mail para envio do reporte")
     return
   }
 
@@ -55,7 +65,8 @@ searchGoogleForm.addEventListener("submit", function(e) {
   fetch("http://localhost:3000?location=Brazil", opt).
   then(res => {
     if (res.status == 400) {
-      alert("Nenhum resultado encontrado para sua busca nas páginas 1 - 5 do Google")
+      alert("Nenhum resultado encontrado para sua busca nas páginas 1 - 3 do Google")
+      return
     }
 
     alert("E-mail enviado para seu inbox!")
